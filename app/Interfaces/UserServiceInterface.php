@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 interface UserServiceInterface
 {
     public function  createUser(UserDto $userDto): Builder|Model;
+    public function  editUser(int $userId, UserDto $userDto): Builder|Model;
     public function  getUserById(int $userId): Builder|Model;
     public function  setupPin(User $user, string $pin): void;
 

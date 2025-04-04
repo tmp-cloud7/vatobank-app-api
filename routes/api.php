@@ -32,7 +32,9 @@ Route::prefix('auth')->group(function () {
     Route::post('login', [AuthenticationController::class, 'login']);
     Route::middleware("auth:sanctum")->group(function () {
         Route::get("user", [AuthenticationController::class, 'user']);
+        Route::put('editUser', [AuthenticationController::class, 'editUser']);
         Route::get('logout', [AuthenticationController::class, 'logout']);
+        Route::get('refresh', [AuthenticationController::class, 'refresh']);
     });
 });
 

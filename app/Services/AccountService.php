@@ -48,12 +48,18 @@ class AccountService implements AccountServiceInterface
 
     /**
      * @param User $user
-     * @return bool
+    //  * @return bool
      */
-    public function hasAccountNumber(UserDto $userDto): bool
-    {
-        return $this->modelQuery()->where('user_id', $userDto->getId())->exists();
-    }
+    // public function hasAccountNumber(UserDto $userDto): bool
+    // {
+    //     return $this->modelQuery()->where('user_id', $userDto->getId())->exists();
+    // }
+    public function hasAccountNumber(UserDto $userDto): ?Account
+{
+    // Check if the account exists for the given user
+    return $this->modelQuery()->where('user_id', $userDto->getId())->first();
+}
+
 
     /**
      * @param UserDto $userDto
@@ -61,15 +67,29 @@ class AccountService implements AccountServiceInterface
      */
     public function createAccountNumber(UserDto $userDto): Account
     {
+        // Check if an account already exists for the user
+    $existingAccount = $this->hasAccountNumber($userDto);
+    
+    if ($existingAccount) {
+        // If account exists, return the existing account instead of throwing an error
+        return $existingAccount;
+    }
 
-        if ($this->hasAccountNumber($userDto)) {
-            throw new AccountNumberExistsException();
-        }
-        /** @var Account */
-        return $this->modelQuery()->create([
-            'account_number' => substr($userDto->getPhoneNumber(), -10),
-            'user_id' => $userDto->getId(),
-        ]);
+    // Create a new account if no existing account is found
+    /** @var Account */
+    return $this->modelQuery()->create([
+        'account_number' => substr($userDto->getPhoneNumber(), -10),
+        'user_id' => $userDto->getId(),
+    ]);
+
+        // if ($this->hasAccountNumber($userDto)) {
+        //     throw new AccountNumberExistsException();
+        // }
+        // /** @var Account */
+        // return $this->modelQuery()->create([
+        //     'account_number' => substr($userDto->getPhoneNumber(), -10),
+        //     'user_id' => $userDto->getId(),
+        // ]);
     }
 
 

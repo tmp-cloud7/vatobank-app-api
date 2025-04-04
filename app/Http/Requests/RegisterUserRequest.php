@@ -25,9 +25,17 @@ class RegisterUserRequest extends FormRequest
 
         return [
             'name' => ['required', 'string', 'min:2', 'max:200'],
+            'lastname' => ['required', 'string', 'min:2', 'max:200'],
+            'middlename' => ['nullable', 'string', 'min:2', 'max:200'],
             'email' => ['required', 'email', 'max:200', 'unique:users'],
-            'password' => ['required', 'string', 'max:200'],
-            'phone_number' => ['required', 'string', 'min:10', 'max:20', 'unique:users']
+            'password' => ['required', 'string', 'min:8', 'max:200'],
+            'phone_number' => ['required', 'string', 'min:10', 'max:20', 'unique:users'],
+            'address' => ['nullable', 'string', 'max:200'],
+            'sog' => ['nullable', 'string', 'max:20'],
+            'dob' => ['nullable', 'date'], 
+            'gender' => ['nullable', 'string','in:male,female,other'],
+           'profile_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2046'],
+
         ];
     }
 }

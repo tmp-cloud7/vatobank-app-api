@@ -8,4 +8,4 @@ class AccountNumberExistsException extends \Exception
     {
         parent::__construct('Account number has already been generated');
     }
-}
+} 
