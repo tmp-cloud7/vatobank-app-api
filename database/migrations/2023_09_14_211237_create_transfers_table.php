@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('sender_account_id')->nullable()->constrained('accounts');
             $table->foreignId('recipient_id')->nullable()->constrained('users');
             $table->foreignId('recipient_account_id')->nullable()->constrained('accounts');
+            // $table->foreignId('recipient_account_id')->nullable()->constrained('accounts')->onDelete('cascade');;
             $table->string('reference')->index('transfer_reference_index');
             $table->string('status');
             $table->decimal('amount', 16, 4);

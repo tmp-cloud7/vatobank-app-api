@@ -284,8 +284,8 @@ class AccountService implements AccountServiceInterface
             $transferDto->setSenderId($lockedSenderAccountDto->getUserId());
             $transferDto->setSenderAccountId($lockedSenderAccountDto->getId());
 
-            $transferDto->setRecepientAccountId($lockedReceiverAccountDto->getUserId());
-            $transferDto->setRecepientId($lockedReceiverAccountDto->getId());
+            $transferDto->setRecepientAccountId($lockedReceiverAccountDto->getId());
+            $transferDto->setRecepientId($lockedReceiverAccountDto->getUserId());
 
             $transferDto->setAmount($amount);
 
